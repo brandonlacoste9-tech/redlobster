@@ -395,6 +395,24 @@ function sendMessage(msg) {
 
 // ===== OPEN / CLOSE TERMINAL =====
 function openTerminal() {
+    // Check payment status from localStorage
+    const isPaid = localStorage.getItem('openclaw_paid') === 'true';
+
+    if (!isPaid) {
+        // Not paid: Scroll to subscription section
+        const subscribeSection = document.getElementById('subscribe');
+        if (subscribeSection) {
+            subscribeSection.scrollIntoView({ behavior: 'smooth' });
+            // Add a temporary glow to the card
+            const card = document.querySelector('.subscribe-card');
+            if (card) {
+                card.style.boxShadow = '0 0 30px var(--accent-gold)';
+                setTimeout(() => { card.style.boxShadow = ''; }, 2000);
+            }
+        }
+        return;
+    }
+
     terminalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     summonBtn.classList.add('awakening');
@@ -418,6 +436,21 @@ function closeTerminal() {
 summonBtn.addEventListener('click', openTerminal);
 terminalClose.addEventListener('click', closeTerminal);
 terminalBackdrop.addEventListener('click', closeTerminal);
+
+// Pay button listener (simulating payment success)
+const payBtn = document.getElementById('payBtn');
+if (payBtn) {
+    payBtn.addEventListener('click', () => {
+        // Mark as paid
+        localStorage.setItem('openclaw_paid', 'true');
+
+        // After a delay (to allow the stripe link to open in new tab), 
+        // we can also open the terminal on the current page to show "Welcome"
+        setTimeout(() => {
+            openTerminal();
+        }, 1500);
+    });
+}
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && terminalOverlay.classList.contains('open')) {
