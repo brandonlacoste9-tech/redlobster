@@ -61,7 +61,7 @@ class AIAssistant {
       if (matchedTopic) {
         response = this.recall(matchedTopic);
       } else {
-        response = 'I\'m processing your query. I can learn new things if you teach me using the learn() method!';
+        response = 'I\'m processing your query. To teach me new things, you can use: assistant.learn("topic", "information")';
       }
     }
     

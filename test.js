@@ -21,7 +21,7 @@ function runTests() {
   
   // Test 2: Learn functionality
   console.log('Test 2: Learn functionality');
-  const learnResult = assistant.learn('Node.js', 'A JavaScript runtime built on Chrome\'s V8 engine');
+  const learnResult = assistant.learn('Node.js', "A JavaScript runtime built on Chrome's V8 engine");
   assert(learnResult.includes('Node.js'), 'Learn should return confirmation message');
   console.log('✓ Pass\n');
   
