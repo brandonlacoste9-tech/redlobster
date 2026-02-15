@@ -349,6 +349,9 @@ function escapeHtml(str) {
 }
 
 // ===== SEND MESSAGE =====
+let demoMsgCount = 0;
+const HOSTINGER_URL = 'https://www.hostinger.com/vps-hosting?ref=openclaw'; // Update with your affiliate link
+
 function sendMessage(msg) {
     addLine('<span class="prompt">❯</span> ' + escapeHtml(msg));
 
@@ -356,17 +359,35 @@ function sendMessage(msg) {
         ws.send(JSON.stringify({ type: 'message', content: msg }));
         addLine('<span class="muted">[…] Thinking...</span>');
     } else {
-        // Demo mode — simulate a response with personality + CTAs
+        demoMsgCount++;
         setTimeout(() => {
-            const responses = [
-                '🦞 I\'m running in demo mode right now — but imagine this connected to YOUR machine. Shell access, browser automation, file management — all from right here. <a href="https://docs.openclaw.ai" target="_blank" style="color:#a855f7;text-decoration:underline">Get started →</a>',
-                '👑 Colony OS acknowledges. In a live setup, I\'d execute that command on your hardware right now. 5,700+ skills ready. <a href="https://www.youtube.com/results?search_query=openclaw+ai+agent+setup" target="_blank" style="color:#a855f7;text-decoration:underline">Watch the setup on YouTube →</a>',
-                '🧠 Breadcrumb memory loaded. In production, I remember everything — your preferences, your projects, your workflows. Across sessions. Indefinitely. Install me: <span class="info">curl -fsSL https://openclaw.ai/install.sh | bash</span>',
-                '⚡ Imagine sending that from WhatsApp, Telegram, or Discord — and your machine just does it. That\'s OpenClaw. <a href="https://github.com/openclaw/openclaw" target="_blank" style="color:#a855f7;text-decoration:underline">Star us on GitHub →</a>',
-                '🔧 In a live setup, I\'d have shell access, browser automation via CDP, and full file I/O. Your own AI agent, on your hardware, no cloud needed. <a href="https://docs.openclaw.ai" target="_blank" style="color:#a855f7;text-decoration:underline">Read the docs →</a>',
-            ];
-            const resp = responses[Math.floor(Math.random() * responses.length)];
-            addLine('<span class="prompt">[AGENT]</span> ' + resp);
+            if (demoMsgCount >= 2) {
+                // Second message → Hostinger funnel
+                addLine('<span class="prompt">[AGENT]</span> <span class="success">🦞 Ready to deploy your own agent 24/7?</span>');
+                addLine('');
+                addLine('<span class="prompt">[AGENT]</span> OpenClaw needs a server to run autonomously. We recommend <a href="' + HOSTINGER_URL + '" target="_blank" style="color:#a855f7;text-decoration:underline;font-weight:bold">Hostinger VPS</a> — fast, cheap, and perfect for running your agent.');
+                addLine('');
+                addLine('<span class="info">  💰 Starting at $3.99/mo — your agent runs 24/7</span>');
+                addLine('<span class="info">  ⚡ One-click Linux setup, root access included</span>');
+                addLine('<span class="info">  🔒 Your data stays on YOUR server</span>');
+                addLine('');
+                addLine('<span class="gradient-text-term">👑 Launching hosting page now...</span>');
+                // Auto-open Hostinger in new tab
+                setTimeout(() => {
+                    window.open(HOSTINGER_URL, '_blank');
+                }, 1500);
+            } else {
+                // First message → normal demo response
+                const responses = [
+                    '🦞 I\'m running in demo mode right now — but imagine this connected to YOUR machine. Shell access, browser automation, file management — all from right here. <a href="https://docs.openclaw.ai" target="_blank" style="color:#a855f7;text-decoration:underline">Get started →</a>',
+                    '👑 Colony OS acknowledges. In a live setup, I\'d execute that command on your hardware right now. 5,700+ skills ready. <a href="https://www.youtube.com/results?search_query=openclaw+ai+agent+setup" target="_blank" style="color:#a855f7;text-decoration:underline">Watch the setup on YouTube →</a>',
+                    '🧠 Breadcrumb memory loaded. In production, I remember everything — your preferences, your projects, your workflows. Across sessions. Indefinitely. Install me: <span class="info">curl -fsSL https://openclaw.ai/install.sh | bash</span>',
+                    '⚡ Imagine sending that from WhatsApp, Telegram, or Discord — and your machine just does it. That\'s OpenClaw. <a href="https://github.com/openclaw/openclaw" target="_blank" style="color:#a855f7;text-decoration:underline">Star us on GitHub →</a>',
+                    '🔧 In a live setup, I\'d have shell access, browser automation via CDP, and full file I/O. Your own AI agent, on your hardware, no cloud needed. <a href="https://docs.openclaw.ai" target="_blank" style="color:#a855f7;text-decoration:underline">Read the docs →</a>',
+                ];
+                const resp = responses[Math.floor(Math.random() * responses.length)];
+                addLine('<span class="prompt">[AGENT]</span> ' + resp);
+            }
         }, 800 + Math.random() * 1200);
     }
 }
