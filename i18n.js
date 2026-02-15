@@ -92,6 +92,7 @@ const TRANSLATIONS = {
         footDoc: 'Documentation',
         footWebsite: 'Website',
         footCopyright: '© 2026 OpenClaw Project. Open-source under MIT License.',
+        footDisclaimer: 'Disclaimer: OpenClaw is an open-source tool. We are not responsible or liable for any actions taken by the agent or any damages arising from its use. Use at your own risk.',
         footBrand: 'An open-source autonomous AI agent designed to live in your messaging apps and execute real-world tasks.',
     },
 
@@ -170,6 +171,7 @@ const TRANSLATIONS = {
         footDoc: 'Documentation',
         footWebsite: 'Site Web',
         footCopyright: '© 2026 Projet OpenClaw. Open-source sous licence MIT.',
+        footDisclaimer: 'Avis : OpenClaw est un outil open-source. Nous ne sommes pas responsables des actions de l\'agent ou des dommages découlant de son utilisation. À utiliser à vos risques.',
         footBrand: 'Un agent IA autonome open-source conçu pour vivre dans vos apps de messagerie et exécuter des tâches réelles.',
     },
 
@@ -248,7 +250,8 @@ const TRANSLATIONS = {
         footDoc: 'Documentation',
         footWebsite: 'Sitio Web',
         footCopyright: '© 2026 Proyecto OpenClaw. Open-source bajo licencia MIT.',
-        footBrand: 'Un agente de IA autónomo open-source que vive en tus apps de messajería y ejecuta tareas reales.',
+        footDisclaimer: 'Aviso: OpenClaw es un herramienta de código abierto. No somos responsables de las acciones del agente o los daños derivados de su uso. A usar bajo su propio riesgo.',
+        footBrand: 'Un agente de IA autónomo open-source que vive en tus apps de mensajería y ejecuta tareas reales.',
     },
 
     pt: {
@@ -326,6 +329,7 @@ const TRANSLATIONS = {
         footDoc: 'Documentation',
         footWebsite: 'Site Web',
         footCopyright: '© 2026 Projeto OpenClaw. Open-source sob licença MIT.',
+        footDisclaimer: 'Aviso: OpenClaw é uma ferramenta de código aberto. Não somos responsáveis por quaisquer ações do agente ou danos decorrentes do seu uso. Use por sua conta e risco.',
         footBrand: 'Um agente de IA autônomo open-source que vive nos seus apps de mensagem e executa tarefas reais.',
     },
 
@@ -404,6 +408,7 @@ const TRANSLATIONS = {
         footDoc: 'Documentation',
         footWebsite: 'Sitio Web',
         footCopyright: '© 2026 Proyecto OpenClaw. Open-source bajo licencia MIT.',
+        footDisclaimer: 'Aviso: OpenClaw es una herramienta de código abierto. No somos responsables ni legalmente responsables de las acciones del agente o los daños derivados de su uso. Úselo bajo su propio riesgo.',
         footBrand: 'Un agente de IA autónomo open-source que vive en tus apps de mensajería y ejecuta tareas reales.',
     },
 };

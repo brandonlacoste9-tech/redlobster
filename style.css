@@ -938,6 +938,20 @@ img {
   font-size: 0.82rem;
 }
 
+.footer-copyright-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
 .footer-bottom .powered-by {
   color: var(--text-muted);
   font-size: 0.82rem;
