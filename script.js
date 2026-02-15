@@ -350,7 +350,7 @@ function escapeHtml(str) {
 
 // ===== SEND MESSAGE =====
 let demoMsgCount = 0;
-const HOSTINGER_URL = 'https://www.hostinger.com/vps-hosting/openclaw'; // Update with your affiliate link
+const HOSTINGER_URL = 'https://hostingeracademy.com/4a0Wb6A'; // Hostinger academy link
 
 function sendMessage(msg) {
     addLine('<span class="prompt">❯</span> ' + escapeHtml(msg));
@@ -365,15 +365,14 @@ function sendMessage(msg) {
                 // Second message → Hostinger funnel
                 addLine('<span class="prompt">[AGENT]</span> <span class="success">🦞 Ready to deploy your own agent 24/7?</span>');
                 addLine('');
-                addLine('<span class="prompt">[AGENT]</span> Deploy OpenClaw in seconds with <a href="' + HOSTINGER_URL + '" target="_blank" style="color:#a855f7;text-decoration:underline;font-weight:bold">Hostinger VPS</a> — the official recommended host.');
+                addLine('<span class="prompt">[AGENT]</span> Get lifetime access to OpenClaw for just <span class="highlight">$10</span>, then deploy on <a href="' + HOSTINGER_URL + '" target="_blank" style="color:#a855f7;text-decoration:none;font-weight:bold;border-bottom:1px dashed #a855f7">Hostinger VPS</a> — use code <strong>OPEN10</strong> for 10% off.');
                 addLine('');
                 addLine('<span class="info">  🚀 One-click Docker deployment — production-ready instantly</span>');
-                addLine('<span class="info">  🧠 Pre-integrated AI tokens — no third-party API keys needed</span>');
-                addLine('<span class="info">  🔒 Self-hosted — your data stays on YOUR server</span>');
-                addLine('<span class="info">  ⚡ 24/7 always-on — agent runs even when you sleep</span>');
-                addLine('<span class="info">  💰 Starting at $6.99/mo — 2 vCPU, 8 GB RAM, 100 GB NVMe</span>');
+                addLine('<span class="info">  🧠 Pre-integrated AI tokens — no third-party keys needed</span>');
+                addLine('<span class="info">  ⚡ 24/7 always-on — stays online even when you sleep</span>');
+                addLine('<span class="info">  💰 Promo: $4.99/mo + 10% OFF with code OPEN10</span>');
                 addLine('');
-                addLine('<span class="gradient-text-term">👑 Launching deploy page now...</span>');
+                addLine('<span class="gradient-text-term">👑 Launching secure deployment environment...</span>');
                 // Auto-open Hostinger in new tab
                 setTimeout(() => {
                     window.open(HOSTINGER_URL, '_blank');

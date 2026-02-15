@@ -1025,6 +1025,15 @@ img {
   font-size: 1rem;
   color: var(--text-muted);
   font-weight: 500;
+  display: block;
+}
+
+.price-hosting {
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  margin-top: 8px;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
 .subscribe-perks {
