@@ -350,7 +350,7 @@ function escapeHtml(str) {
 
 // ===== SEND MESSAGE =====
 let demoMsgCount = 0;
-const HOSTINGER_URL = 'https://www.hostinger.com/vps-hosting?ref=openclaw'; // Update with your affiliate link
+const HOSTINGER_URL = 'https://www.hostinger.com/vps-hosting/openclaw'; // Update with your affiliate link
 
 function sendMessage(msg) {
     addLine('<span class="prompt">❯</span> ' + escapeHtml(msg));
@@ -365,13 +365,15 @@ function sendMessage(msg) {
                 // Second message → Hostinger funnel
                 addLine('<span class="prompt">[AGENT]</span> <span class="success">🦞 Ready to deploy your own agent 24/7?</span>');
                 addLine('');
-                addLine('<span class="prompt">[AGENT]</span> OpenClaw needs a server to run autonomously. We recommend <a href="' + HOSTINGER_URL + '" target="_blank" style="color:#a855f7;text-decoration:underline;font-weight:bold">Hostinger VPS</a> — fast, cheap, and perfect for running your agent.');
+                addLine('<span class="prompt">[AGENT]</span> Deploy OpenClaw in seconds with <a href="' + HOSTINGER_URL + '" target="_blank" style="color:#a855f7;text-decoration:underline;font-weight:bold">Hostinger VPS</a> — the official recommended host.');
                 addLine('');
-                addLine('<span class="info">  💰 Starting at $3.99/mo — your agent runs 24/7</span>');
-                addLine('<span class="info">  ⚡ One-click Linux setup, root access included</span>');
-                addLine('<span class="info">  🔒 Your data stays on YOUR server</span>');
+                addLine('<span class="info">  🚀 One-click Docker deployment — production-ready instantly</span>');
+                addLine('<span class="info">  🧠 Pre-integrated AI tokens — no third-party API keys needed</span>');
+                addLine('<span class="info">  🔒 Self-hosted — your data stays on YOUR server</span>');
+                addLine('<span class="info">  ⚡ 24/7 always-on — agent runs even when you sleep</span>');
+                addLine('<span class="info">  💰 Starting at $6.99/mo — 2 vCPU, 8 GB RAM, 100 GB NVMe</span>');
                 addLine('');
-                addLine('<span class="gradient-text-term">👑 Launching hosting page now...</span>');
+                addLine('<span class="gradient-text-term">👑 Launching deploy page now...</span>');
                 // Auto-open Hostinger in new tab
                 setTimeout(() => {
                     window.open(HOSTINGER_URL, '_blank');
