@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaw — Your AI Agent That Actually Does Things</title>
+  <meta name="description"
+    content="OpenClaw is an open-source, autonomous AI agent that lives in your messaging apps and executes real-world tasks on your hardware. Unlike chatbots that just talk, OpenClaw is built to do." />
+  <meta name="keywords" content="OpenClaw, AI agent, autonomous, open source, WhatsApp, Telegram, automation" />
+  <meta property="og:title" content="OpenClaw — AI That Does, Not Just Talks" />
+  <meta property="og:description"
+    content="An open-source autonomous AI agent for your messaging apps. Shell execution, browser automation, 5,700+ skills." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--cyan"></div>
+  <div class="bg-glow bg-glow--magenta"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">🦞</span>
+        <span class="logo-text"><span>Open</span>Claw</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#features" data-i18n="navFeatures">Features</a>
+        <a href="#channels" data-i18n="navChannels">Channels</a>
+        <a href="#skills" data-i18n="navSkills">Skills</a>
+        <a href="#autonomy" data-i18n="navAutonomy">Autonomy</a>
+        <a href="https://docs.openclaw.ai" target="_blank" rel="noopener" class="nav-cta" data-i18n="navDocs">Docs</a>
+      </div>
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn" id="langCurrent">🇬🇧 EN</button>
+        <div class="lang-dropdown" id="langDropdown">
+          <button data-lang="en">🇬🇧 English</button>
+          <button data-lang="fr">🇨🇦 Français</button>
+          <button data-lang="es">🇪🇸 Español</button>
+          <button data-lang="pt">🇧🇷 Português</button>
+          <button data-lang="ar">🇦🇷 Argentina</button>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span data-i18n="heroBadge">Open Source &middot; Autonomous &middot; Local-First</span>
+      </div>
+      <h1 class="hero-title" data-i18n="heroTitle">
+        AI That <span class="gradient-text">Does</span>,<br />
+        Not Just Talks
+      </h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        OpenClaw is an autonomous AI agent that lives in your messaging apps and executes
+        real&#8209;world tasks on your hardware. Shell commands, browser automation, file management —
+        all from a WhatsApp message.
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener">
+          <button class="btn-primary" id="getStartedBtn" data-i18n="heroGetStarted">Get Started</button>
+        </a>
+        <a href="https://docs.openclaw.ai" target="_blank" rel="noopener">
+          <button class="btn-secondary" data-i18n="heroReadDocs">Read the Docs</button>
+        </a>
+      </div>
+      <div class="hero-install">
+        <div class="install-box">
+          <code><span>$</span> curl -fsSL https://openclaw.ai/install.sh | bash</code>
+          <button class="copy-btn" id="copyBtn" aria-label="Copy install command" title="Copy">📋</button>
+        </div>
+      </div>
+      <div style="margin-top:32px">
+        <button class="btn-summon" id="summonBtn" data-i18n="heroSummon">👑 Summon the Agent</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TERMINAL OVERLAY ===== -->
+  <div class="terminal-overlay" id="terminalOverlay">
+    <div class="terminal-backdrop" id="terminalBackdrop"></div>
+    <div class="terminal-window">
+      <button class="terminal-close" id="terminalClose" aria-label="Close terminal">✕</button>
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="terminal-dot terminal-dot--red"></span>
+          <span class="terminal-dot terminal-dot--yellow"></span>
+          <span class="terminal-dot terminal-dot--green"></span>
+        </div>
+        <span class="terminal-title">OPENCLAW :: GATEWAY</span>
+        <div class="terminal-status">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-label" id="statusLabel">Offline</span>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
+      <div class="terminal-input-line">
+        <span class="prompt-symbol">❯</span>
+        <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a message to the agent..."
+          autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <span class="section-label reveal" data-i18n="featLabel">Core Capabilities</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="featTitle">
+        Your machine, <span class="highlight">supercharged</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2" data-i18n="featSubtitle">
+        OpenClaw runs locally on your hardware with direct system access — no cloud middleware, no API proxies, just raw
+        execution power.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon feature-icon--cyan">⚡</div>
+          <h3 data-i18n="featShellTitle">Shell Execution</h3>
+          <p data-i18n="featShellDesc">Run terminal commands, execute scripts, and manage your local environment. Full
+            shell access from any messaging app.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon feature-icon--magenta">📁</div>
+          <h3 data-i18n="featFileTitle">File Management</h3>
+          <p data-i18n="featFileDesc">Read and write files directly to disk. Maintains memory and project context in
+            plain Markdown and YAML files.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon feature-icon--amber">🌐</div>
+          <h3 data-i18n="featBrowserTitle">Browser Automation</h3>
+          <p data-i18n="featBrowserDesc">Uses Chrome DevTools Protocol to see and interact with websites — filling
+            forms, scraping data, taking screenshots.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon feature-icon--green">🧠</div>
+          <h3 data-i18n="featLlmTitle">Local LLM Support</h3>
+          <p data-i18n="featLlmDesc">Works seamlessly with Ollama or LM Studio. Run your entire agentic stack offline —
+            fully private and on-device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHANNELS ===== -->
+  <section class="channels" id="channels">
+    <div class="container">
+      <span class="section-label reveal" data-i18n="chanLabel">Channel Agnostic</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="chanTitle">
+        Your apps. <span class="highlight">Your agent.</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2" data-i18n="chanSubtitle">
+        No new apps to install. OpenClaw meets you where you already are.
+      </p>
+
+      <div class="channels-wrapper">
+        <div class="channels-visual reveal">
+          <div class="channel-chip"><span class="chip-icon">💬</span> WhatsApp</div>
+          <div class="channel-chip"><span class="chip-icon">✈️</span> Telegram</div>
+          <div class="channel-chip"><span class="chip-icon">🎮</span> Discord</div>
+          <div class="channel-chip"><span class="chip-icon">💬</span> iMessage</div>
+          <div class="channel-chip"><span class="chip-icon">💼</span> Slack</div>
+          <div class="channel-chip"><span class="chip-icon">🔒</span> Signal</div>
+        </div>
+
+        <div class="channels-info reveal reveal-delay-1">
+          <div class="channel-feature">
+            <div class="channel-feature-icon">🎙️</div>
+            <div>
+              <h4 data-i18n="chanVoiceTitle">Voice &amp; Media</h4>
+              <p data-i18n="chanVoiceDesc">Receive audio messages transcribed with Whisper. Respond with generated audio
+                via ElevenLabs or images.</p>
+            </div>
+          </div>
+          <div class="channel-feature">
+            <div class="channel-feature-icon">🎨</div>
+            <div>
+              <h4 data-i18n="chanCanvasTitle">Live Canvas</h4>
+              <p data-i18n="chanCanvasDesc">A visual interface for complex tasks — code editing, data visualization, and
+                interactive workflows.</p>
+            </div>
+          </div>
+          <div class="channel-feature">
+            <div class="channel-feature-icon">🔗</div>
+            <div>
+              <h4 data-i18n="chanContextTitle">Unified Context</h4>
+              <p data-i18n="chanContextDesc">Seamlessly switch between channels. Your agent remembers context across all
+                messaging platforms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="skills-header">
+        <span class="section-label reveal" data-i18n="skillLabel">ClawHub Ecosystem</span>
+        <div class="skills-counter reveal reveal-delay-1">
+          <span class="count" id="skillCount">0</span>
+          <span class="label" data-i18n="skillCounter">community-built skills</span>
+        </div>
+        <h2 class="section-title reveal reveal-delay-2" data-i18n="skillTitle">
+          Extend <span class="highlight">everything</span>
+        </h2>
+        <p class="section-subtitle reveal reveal-delay-3" data-i18n="skillSubtitle">
+          From productivity to DevOps to smart home — the ClawHub community has built skills for almost anything you can
+          imagine.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-card-icon">📅</div>
+          <h3 data-i18n="skillProdTitle">Productivity</h3>
+          <p data-i18n="skillProdDesc">Manage calendars, triage emails, and sync tasks to Todoist or Notion. Let the
+            agent handle the busywork.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Google Calendar</span>
+            <span class="skill-tag">Apple Calendar</span>
+            <span class="skill-tag">Todoist</span>
+            <span class="skill-tag">Notion</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-card-icon">🔧</div>
+          <h3 data-i18n="skillDevTitle">DevOps</h3>
+          <p data-i18n="skillDevDesc">Monitor GitHub repos, trigger deployments, and debug codebases autonomously. CI/CD
+            on autopilot.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Fly.io</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-3">
+          <div class="skill-card-icon">🏠</div>
+          <h3 data-i18n="skillHomeTitle">Smart Home</h3>
+          <p data-i18n="skillHomeDesc">Control Philips Hue, Elgato devices, or Home Assistant setups — all through a
+            chat message.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Hue</span>
+            <span class="skill-tag">Elgato</span>
+            <span class="skill-tag">Home Assistant</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-4">
+          <div class="skill-card-icon">📱</div>
+          <h3 data-i18n="skillSocialTitle">Social Media</h3>
+          <p data-i18n="skillSocialDesc">Draft and schedule posts for X (Twitter) or Bluesky. Grow your presence without
+            the grind.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">X / Twitter</span>
+            <span class="skill-tag">Bluesky</span>
+            <span class="skill-tag">Threads</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AUTONOMY ===== -->
+  <section class="autonomy" id="autonomy">
+    <div class="container">
+      <div style="text-align:center">
+        <span class="section-label reveal" data-i18n="autoLabel">Proactive Intelligence</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="autoTitle">
+          It works <span class="highlight">while you sleep</span>
+        </h2>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto" data-i18n="autoSubtitle">
+          OpenClaw doesn't wait for instructions. Set it to Heartbeat mode and let it take action autonomously.
+        </p>
+      </div>
+
+      <div class="autonomy-grid">
+        <div class="autonomy-card reveal reveal-delay-1">
+          <span class="autonomy-icon">💓</span>
+          <h3 data-i18n="autoHeartTitle">Heartbeat Mode</h3>
+          <p data-i18n="autoHeartDesc">Checks a HEARTBEAT.md checklist every 30–60 minutes and decides to take action —
+            like checking you into a flight or summarizing news.</p>
+        </div>
+        <div class="autonomy-card reveal reveal-delay-2">
+          <span class="autonomy-icon">⏰</span>
+          <h3 data-i18n="autoCronTitle">Cron Jobs</h3>
+          <p data-i18n="autoCronDesc">Schedule repetitive tasks or monitor specific web and system conditions. Your
+            agent runs on your schedule.</p>
+        </div>
+        <div class="autonomy-card reveal reveal-delay-3">
+          <span class="autonomy-icon">🧩</span>
+          <h3 data-i18n="autoMemTitle">Persistent Memory</h3>
+          <p data-i18n="autoMemDesc">Uses a "Breadcrumbs" system to remember your preferences and project details across
+            sessions indefinitely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUBSCRIBE ===== -->
+  <section class="subscribe" id="subscribe">
+    <div class="container">
+      <div style="text-align:center">
+        <span class="section-label reveal" data-i18n="subLabel">Join the Colony</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="subTitle">
+          Become a <span class="highlight">member</span>
+        </h2>
+        <div class="sold-ticker reveal reveal-delay-2">
+          <span class="ticker-dot"></span>
+          <span class="ticker-count" id="soldCount">462</span>
+          <span class="ticker-label" data-i18n="subTicker">agents deployed &amp; counting</span>
+        </div>
+      </div>
+
+      <div class="subscribe-card reveal reveal-delay-3">
+        <div class="subscribe-price">
+          <span class="price-amount">$20</span>
+          <span class="price-period">CAD / month</span>
+        </div>
+        <ul class="subscribe-perks">
+          <li data-i18n="subPerk1">🦞 Full OpenClaw agent on your hardware</li>
+          <li data-i18n="subPerk2">🧠 Antigravity reasoning engine access</li>
+          <li data-i18n="subPerk3">📦 5,700+ community skills via ClawHub</li>
+          <li data-i18n="subPerk4">💬 All channels — WhatsApp, Telegram, Discord &amp; more</li>
+          <li data-i18n="subPerk5">💓 Heartbeat mode &amp; autonomous task execution</li>
+          <li data-i18n="subPerk6">🔧 Priority support &amp; early feature access</li>
+        </ul>
+        <a href="https://buy.stripe.com/28E00ibBHbSl9S6a9z1Fe0b" target="_blank" rel="noopener">
+          <button class="btn-subscribe" data-i18n="subBtn">👑 Subscribe Now</button>
+        </a>
+        <p class="subscribe-note" data-i18n="subNote">Cancel anytime &middot; Secure payment via Stripe</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECURITY ===== -->
+  <section class="security" id="security">
+    <div class="container">
+      <div class="security-banner reveal">
+        <span class="security-icon">🛡️</span>
+        <div class="security-content">
+          <h3 data-i18n="secTitle">A Note on Security</h3>
+          <p data-i18n="secDesc">
+            Because OpenClaw has shell and file access, it's widely recommended to run it in a
+            <strong>sandboxed environment</strong> or a dedicated VPS rather than your primary
+            daily-driver machine to mitigate risks from unvetted community skills.
+            Always review skills before installing and keep your gateway authenticated.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-icon">🦞</span>
+            <span class="logo-text"><span>Open</span>Claw</span>
+          </a>
+          <p data-i18n="footBrand">An open-source autonomous AI agent designed to live in your messaging apps and
+            execute real-world tasks.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4 data-i18n="footProduct">Product</h4>
+            <a href="#features" data-i18n="navFeatures">Features</a>
+            <a href="#channels" data-i18n="navChannels">Channels</a>
+            <a href="#skills" data-i18n="navSkills">Skills</a>
+            <a href="#autonomy" data-i18n="navAutonomy">Autonomy</a>
+          </div>
+          <div class="footer-col">
+            <h4 data-i18n="footResources">Resources</h4>
+            <a href="https://docs.openclaw.ai" target="_blank" rel="noopener" data-i18n="footDoc">Documentation</a>
+            <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://openclaw.ai" target="_blank" rel="noopener" data-i18n="footWebsite">Website</a>
+          </div>
+          <div class="footer-col">
+            <h4 data-i18n="footCommunity">Community</h4>
+            <a href="#">Discord</a>
+            <a href="#">Telegram</a>
+            <a href="#">ClawHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footCopyright">&copy; 2026 OpenClaw Project. Open-source under MIT License.</p>
+        <span class="powered-by">Built with <span>Antigravity</span> ✦ <span>OpenClaw</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
