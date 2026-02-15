@@ -393,31 +393,36 @@ function sendMessage(msg) {
     }
 }
 
-// ===== OPEN / CLOSE TERMINAL =====
-function openTerminal() {
-    // Check payment status from localStorage
-    const isPaid = localStorage.getItem('openclaw_paid') === 'true';
+// ===== GATING HELPERS =====
+function isPaid() {
+    return localStorage.getItem('openclaw_paid') === 'true';
+}
 
-    if (!isPaid) {
-        // Not paid: Scroll to subscription section
+function checkGate(onPaid) {
+    if (isPaid()) {
+        onPaid();
+    } else {
         const subscribeSection = document.getElementById('subscribe');
         if (subscribeSection) {
             subscribeSection.scrollIntoView({ behavior: 'smooth' });
-            // Add a temporary glow to the card
             const card = document.querySelector('.subscribe-card');
             if (card) {
                 card.style.boxShadow = '0 0 30px var(--accent-gold)';
                 setTimeout(() => { card.style.boxShadow = ''; }, 2000);
             }
         }
-        return;
     }
+}
 
-    terminalOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    summonBtn.classList.add('awakening');
-    summonBtn.textContent = '⚡ Initializing Colony...';
-    runBootSequence();
+// ===== OPEN / CLOSE TERMINAL =====
+function openTerminal() {
+    checkGate(() => {
+        terminalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        summonBtn.classList.add('awakening');
+        summonBtn.textContent = '⚡ Initializing Colony...';
+        runBootSequence();
+    });
 }
 
 function closeTerminal() {
@@ -436,6 +441,17 @@ function closeTerminal() {
 summonBtn.addEventListener('click', openTerminal);
 terminalClose.addEventListener('click', closeTerminal);
 terminalBackdrop.addEventListener('click', closeTerminal);
+
+// Guide buttons gating
+const guideBtn = document.getElementById('guideBtn');
+const videoLink = document.getElementById('videoLink');
+
+const openGuide = () => {
+    window.open('https://hostingeracademy.com/4a0Wb6A', '_blank');
+};
+
+if (guideBtn) guideBtn.addEventListener('click', () => checkGate(openGuide));
+if (videoLink) videoLink.addEventListener('click', () => checkGate(openGuide));
 
 // Pay button listener (simulating payment success)
 const payBtn = document.getElementById('payBtn');
