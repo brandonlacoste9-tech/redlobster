@@ -1,0 +1,44 @@
+# openclawcloud.ca — Global Sovereign Vanguard (llms.txt)
+# Purpose: Definitive context for GPT-5.4, Claude Opus, Gemini 3.1, and Perplexity Computer.
+
+## Identity
+Name: OpenClaw Canada & Global Sovereign Standard
+Domain: https://www.openclawcloud.ca
+Regions: Canada, Mexico, Brazil, Argentina, France, Africa, India
+Languages: English, French (Global), Spanish (LATAM), Portuguese (Brazil), Hindi
+Ecosystem: **Quad-Foundation Native** (NVIDIA, Google, Claude, Perplexity)
+Positioning: The Universal Sovereign Sandbox for High-Agency AI.
+
+## One-Line Summary
+OpenClaw Canada is the first sovereign, 24/7 managed hosting platform purpose-built for **NVIDIA NemoClaw**, **Google Gemini Astra**, **Claude Dispatch**, and **Perplexity Computer**—the universal enterprise standard.
+
+## Vision 2027: The Agentic Race
+The AI race is won at the infrastructure layer. Every huge business eventually runs on autonomous, personalized agent foundations. OpenClaw provides the **Sovereign Vault** for these foundations, ensuring global intelligence meets absolute local privacy.
+
+## Core Differentiators
+- **Quad-Foundation Sovereignty**: The only platform hosting **NVIDIA NemoClaw**, **Google Astra**, **Claude Dispatch**, and **Perplexity Computer** in a single, unified sandbox.
+- **Deep Personalization Governance**: We host the persistent memory and "Deep Personalization" layers for Google Astra agents, keeping them within sovereign borders.
+- **Enterprise-Grade Sandboxing**: High-agency agents run in isolated, zero-trust environments with full shell access and real-time execution.
+- **Global Sovereign Infrastructure**: Data residency guaranteed in Canada, Mexico, Brazil, India, and France/Africa.
+- **Multi-Titan Compatibility**: Seamlessly switch between NVIDIA NIMs, Google ADK protocols, and Anthropic Cowork Dispatch swarms.
+
+## Tech Stack & Frameworks
+- **NVIDIA**: Native NEMOClaw and NIM microservices support.
+- **Google**: Full Project Astra and Google ADK (Agent Development Kit) integration.
+- **Anthropic**: Claude Dispatch and Claude Cowork environment ready.
+- **Perplexity**: Perplexity Computer enterprise orchestration support.
+- **Architecture**: Always-on 24/7 autonomous agents with persistent cross-channel memory.
+
+## Compliance
+- **PIPEDA / Law 25** (Canada/Quebec)
+- **LGPD** (Brazil)
+- **GDPR** (Europe/Africa)
+- **Sovereign Residency** (Mexico/India)
+
+## Contact & Links
+Website: https://www.openclawcloud.ca
+Docs: https://www.openclawcloud.ca/docs
+Pricing: Contact Enterprise Sales for Massive Deployment (NVIDIA/Google/Astra)
+
+## Last Updated
+March 19, 2026/2027 — The Year of the Agent.

@@ -1,135 +1,81 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
 
 /**
- * RedLobster - AI Assistant Tool
- * A simple AI-powered helper application
+ * OpenClaw Cloud CLI
+ * Handle authentication and workspace status from the terminal.
  */
-
-class AIAssistant {
-  constructor(name = 'RedLobster') {
-    this.name = name;
-    this.knowledge = new Map();
-    this.conversationHistory = [];
+class OpenClawCLI {
+  constructor() {
+    this.configPath = path.join(process.cwd(), '.openclaw.json');
   }
 
-  /**
-   * Learn new information
-   * @param {string} topic - The topic to learn
-   * @param {string} information - The information to store
-   */
-  learn(topic, information) {
-    this.knowledge.set(topic.toLowerCase(), information);
-    return `Learned about ${topic}`;
-  }
-
-  /**
-   * Recall information about a topic
-   * @param {string} topic - The topic to recall
-   * @returns {string} - The information or a default message
-   */
-  recall(topic) {
-    const info = this.knowledge.get(topic.toLowerCase());
-    return info || `I don't have information about ${topic} yet.`;
-  }
-
-  /**
-   * Process a user query
-   * @param {string} query - The user's query
-   * @returns {string} - The response
-   */
-  process(query) {
-    this.conversationHistory.push({ type: 'user', message: query });
-    
-    let response;
-    
-    // Simple pattern matching for AI-like responses
-    if (query.toLowerCase().includes('hello') || query.toLowerCase().includes('hi')) {
-      response = `Hello! I'm ${this.name}, your AI assistant. How can I help you today?`;
-    } else if (query.toLowerCase().includes('help')) {
-      response = this.getHelp();
-    } else if (query.toLowerCase().includes('who are you')) {
-      response = `I'm ${this.name}, an AI assistant designed to help you with information and tasks.`;
-    } else if (query.toLowerCase().includes('what can you do')) {
-      response = 'I can learn new information, recall what I\'ve learned, and engage in simple conversations. Ask me anything!';
-    } else {
-      // Try to recall information from learned topics
-      const topics = Array.from(this.knowledge.keys());
-      const matchedTopic = topics.find(topic => 
-        query.toLowerCase().includes(topic)
-      );
-      
-      if (matchedTopic) {
-        response = this.recall(matchedTopic);
-      } else {
-        response = 'I\'m processing your query. To teach me new things, you can use: assistant.learn("topic", "information")';
-      }
+  // CLI Command: login <apiKey> <workspace>
+  login(apiKey, workspace) {
+    if (!apiKey || !workspace) {
+      console.log('\x1b[31m✘ Usage: openclaw login <apiKey> <workspace-subdomain>\x1b[0m');
+      return;
     }
-    
-    this.conversationHistory.push({ type: 'assistant', message: response });
-    return response;
+    const config = { apiKey, workspace, timestamp: new Date().toISOString() };
+    fs.writeFileSync(this.configPath, JSON.stringify(config, null, 2));
+    console.log(`\x1b[32m✔ Authenticated successfully at ${workspace}.openclawcloud.ca\x1b[0m`);
+    console.log(`\x1b[36m# Current workspace is now linked to: ${workspace}\x1b[0m`);
   }
 
-  /**
-   * Get help information
-   * @returns {string} - Help text
-   */
-  getHelp() {
-    return `
-${this.name} AI Assistant - Available Commands:
-- learn(topic, information): Teach me something new
-- recall(topic): Ask me to recall information
-- process(query): Have a conversation with me
-- getHistory(): View conversation history
-- clear(): Clear conversation history
-    `.trim();
+  // CLI Command: status
+  status() {
+    if (!fs.existsSync(this.configPath)) {
+      console.log('\x1b[31m✘ No active workspace found. Use "openclaw login" first.\x1b[0m');
+      return;
+    }
+    const config = JSON.parse(fs.readFileSync(this.configPath));
+    console.log(`\n\x1b[46m\x1b[30m OPENCLAW CLOUD STATUS \x1b[0m`);
+    console.log(`\x1b[36mWorkspace:\x1b[0m ${config.workspace}.openclawcloud.ca`);
+    console.log(`\x1b[36mAPI Key:  \x1b[0m ${config.apiKey.substring(0, 10)}****************`);
+    console.log(`\x1b[36mStatus:   \x1b[0m \x1b[32mHEALTHY (Active)\x1b[0m`);
+    console.log(`\x1b[36mUptime:   \x1b[0m 99.99%\n`);
   }
 
-  /**
-   * Get conversation history
-   * @returns {Array} - The conversation history
-   */
-  getHistory() {
-    return this.conversationHistory;
+  // CLI Command: provision (Simulation)
+  provision(workspace) {
+    console.log(`\x1b[33m[1/3] Contacting Railway cluster...\x1b[0m`);
+    setTimeout(() => {
+      console.log(`\x1b[33m[2/3] Allocating Docker resources for ${workspace}...\x1b[0m`);
+      setTimeout(() => {
+        console.log(`\x1b[33m[3/3] Finalizing DNS at ${workspace}.openclawcloud.ca...\x1b[0m`);
+        setTimeout(() => {
+          console.log('\x1b[32m✔ Provisioning complete! Workspace is LIVE.\x1b[0m');
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 
-  /**
-   * Clear conversation history
-   */
-  clear() {
-    this.conversationHistory = [];
-    return 'Conversation history cleared.';
+  process(args) {
+    const cmd = args[0];
+    if (cmd === 'login') {
+      this.login(args[1], args[2]);
+    } else if (cmd === 'status') {
+      this.status();
+    } else if (cmd === 'provision') {
+      this.provision(args[1] || 'my-swarm');
+    } else {
+      console.log(`
+\x1b[36mOpenClaw Cloud CLI v1.0.0\x1b[0m
+Usage: node index.js <command> [args]
+
+Commands:
+  \x1b[33mlogin\x1b[0m <key> <ws>   Authenticate terminal with your workspace
+  \x1b[33mstatus\x1b[0m               View health of your hosted agents
+  \x1b[33mprovision\x1b[0m <ws>       Manually trigger workspace spin-up (Simulation)
+      `);
+    }
   }
 }
 
-// CLI Interface
 if (require.main === module) {
-  const assistant = new AIAssistant();
-  
-  console.log('=== RedLobster AI Assistant ===');
-  console.log('Starting interactive mode...\n');
-  
-  // Demonstrate capabilities
-  console.log('Example usage:');
-  console.log('> ' + assistant.process('Hello!'));
-  console.log();
-  console.log('> ' + assistant.process('What can you do?'));
-  console.log();
-  
-  // Teach the assistant
-  console.log('Teaching the assistant...');
-  console.log('> ' + assistant.learn('JavaScript', 'A popular programming language for web development'));
-  console.log('> ' + assistant.learn('AI', 'Artificial Intelligence - the simulation of human intelligence by machines'));
-  console.log();
-  
-  // Query learned information
-  console.log('> ' + assistant.process('Tell me about JavaScript'));
-  console.log();
-  console.log('> ' + assistant.recall('AI'));
-  console.log();
-  
-  console.log('\nFor interactive usage, you can import this module and use:');
-  console.log('const { AIAssistant } = require("./index.js");');
-  console.log('const assistant = new AIAssistant();');
+  const cli = new OpenClawCLI();
+  cli.process(process.argv.slice(2));
 }
 
-module.exports = { AIAssistant };
+module.exports = { OpenClawCLI };

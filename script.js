@@ -9,8 +9,8 @@ langButtons.forEach(btn => {
     });
 });
 
-// Initialize saved language
-initLanguage();
+// Initialization is handled by i18n.js on DOMContentLoaded
+// initLanguage();
 
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
@@ -402,15 +402,7 @@ function checkGate(onPaid) {
     if (isPaid()) {
         onPaid();
     } else {
-        const subscribeSection = document.getElementById('subscribe');
-        if (subscribeSection) {
-            subscribeSection.scrollIntoView({ behavior: 'smooth' });
-            const card = document.querySelector('.subscribe-card');
-            if (card) {
-                card.style.boxShadow = '0 0 30px var(--accent-gold)';
-                setTimeout(() => { card.style.boxShadow = ''; }, 2000);
-            }
-        }
+        window.location.href = 'wizard.html';
     }
 }
 
@@ -482,4 +474,22 @@ terminalInput.addEventListener('keydown', (e) => {
             terminalInput.value = '';
         }
     }
+});
+
+// ===== FAQ ACCORDION =====
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all other FAQ items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+
+        // Toggle current item
+        item.classList.toggle('active');
+    });
 });

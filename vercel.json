@@ -1,4 +1,12 @@
 {
-    "buildCommand": "",
-    "outputDirectory": "."
+    "rewrites": [
+        { "source": "/fr/(.*)", "destination": "/" },
+        { "source": "/es/(.*)", "destination": "/" },
+        { "source": "/pt/(.*)", "destination": "/" },
+        { "source": "/hi/(.*)", "destination": "/" },
+        { "source": "/fr", "destination": "/" },
+        { "source": "/es", "destination": "/" },
+        { "source": "/pt", "destination": "/" },
+        { "source": "/hi", "destination": "/" }
+    ]
 }
